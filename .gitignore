@@ -2,3 +2,7 @@
 # ignora el entorno virtual
 
 .venv
+
+# ignorar mis objetivos
+
+misiones.md
