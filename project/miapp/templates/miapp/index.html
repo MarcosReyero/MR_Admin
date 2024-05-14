@@ -1,0 +1,43 @@
+{% extends 'miapp/base.html' %}
+{% load static %}
+{% block titulo %}
+    {% include 'miapp/components/titulo_1.html' with titulo="MR" %}
+{% endblock titulo %}
+{% block contenido %}
+
+    {% if user.is_authenticated %}
+        {{ mensaje }}
+        <p class="fs-3">Bienvenido {{ user.username }}</p>
+    {% endif %}
+    <!-- Heading Row-->
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 align-items-center my-5">
+            <div class="col-lg-7">
+                <img class="img-fluid rounded mb-4 mb-lg-0" 
+                src={% static 'img/espace.webp' %}
+                alt="..." /></div>
+
+            <div class="col-lg-5">
+                <h1 class="font-weight-light">Marcos reyero</h1>
+                <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
+                <a class="btn btn-primary" href="#!">Call to Action!</a>
+            </div>
+        </div>
+        <a class="btn btn-primary"
+                   href="https://wa.me/542619999999"
+                   target="_blank">WhatsApp</a>
+            </div>
+        </div>
+        <!-- Call to Action-->
+        <div class="card text-white bg-secondary my-5 py-4 text-center">
+            <div class="card-body"><p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p></div>
+        </div>
+    </div>
+
+         <!-- Content Row-->
+        <div class="row gx-4 gx-lg-5">
+            {% include 'miapp/components/card.html' with titulo="Tarjeta 1" texto="Promociones" %}
+            {% include 'miapp/components/card.html' with titulo="Tarjeta 2" texto="Lorem ipsum dolor sit amet consectetur adipisicing elit. In perferendis repellat quo earum ut, ducimus repudiandae maxime eaque sint, omnis placeat ex necessitatibus rerum dicta itaque dolorem consequatur deleniti praesentium?" %}
+            {% include 'miapp/components/card.html' with titulo="Tarjeta 3" %}
+        </div>
+{% endblock contenido %}
