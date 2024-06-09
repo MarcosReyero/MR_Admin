@@ -1,0 +1,14 @@
+{% extends 'miapp/base.html' %}
+{% block contenido %}
+<h1>Crear nuevo post</h1>
+{% if user.is_authenticated %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+</form>
+{% else %}
+<p>Debes iniciar sesión para crear un nuevo post. <a href="{% url 'miapp:login' %}">Iniciar sesión</a> o <a href="{% url 'miapp:register' %}">Registrarse</a></p>
+{% endif %}
+<a href="{% url 'miapp:post_list' %}">Volver a la lista</a>
+{% endblock %}

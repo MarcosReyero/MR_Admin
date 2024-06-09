@@ -1,0 +1,10 @@
+{% extends 'miapp/base.html' %}
+{% block contenido %}
+<h1>Eliminar post</h1>
+<p>¿Estás seguro que deseas eliminar el post "{{ post.title }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sí, eliminar</button>
+</form>
+<a href="{% url 'post_list' %}">No, volver a la lista</a>
+{% endblock %}
