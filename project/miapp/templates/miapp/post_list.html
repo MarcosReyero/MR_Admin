@@ -1,22 +1,31 @@
 {% extends 'miapp/base.html' %}
 
 {% block titulo %}
-    Posts
+Posts
 {% endblock titulo %}
 
 {% block contenido %}
-    <div class="container">
-        <h1>Lista de Posts</h1>
-        <div class="row">
-            {% for post in posts %}
-            <div class="col-md-6">
-                {% with post_detail_url='miapp:post_detail' post_id=post.pk %}
-                    {% url post_detail_url post_id as url %}
-                    {% include 'miapp/components/post_card.html' with title=post.title url=url author=post.author.username content=post.content %}
-                {% endwith %}
-            </div>
-            {% endfor %}
+<div class="container">
+    <div class="card h-50 mb-lg-2" style="background-color: rgba(19, 19, 20, 0.776);">
+        <div class="card-body">
+            <h1 class="font-weight-light text-light">Posts</h1>
         </div>
     </div>
-    <a class="btn btn-primary" href="{% url 'miapp:post_create' %}">Crear nuevo post</a>
-{% endblock contenido %}
+
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-6 mb-4">
+            {% with post_detail_url='miapp:post_detail' post_id=post.pk %}
+            {% url post_detail_url post_id as url %}
+            {% include 'miapp/components/post_card.html' with title=post.title url=url author=post.author.username content=post.content created_at=post.created_at %}
+            {% endwith %}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <a class="btn btn-primary container" href="{% url 'miapp:post_create' %}">Crear nuevo post</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -7,37 +7,44 @@
 
     {% if user.is_authenticated %}
         {{ mensaje }}
-        <p class="fs-3">Bienvenido {{ user.username }}</p>
+        <div class="col-md-5 mx-auto mb-1 mt-3 text-center">
+            <div class="card h-50" style="background-color: rgba(19, 19, 20, 0.776);">
+                <div class="card-body">
+                    <p class="fs-3">Bienvenido <span class="text-primary">{{ user.username }}</span></p>
+                </div>
+            </div>                
+        </div>
+
     {% endif %}
     <!-- Heading Row-->
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 align-items-center my-5">
             <div class="col-lg-7">
-                <img class="img-fluid rounded mb-4 mb-lg-0" 
-                src={% static 'img/espace.webp' %}
-                alt="..." /></div>
-
-            <div class="col-lg-5">
-                <h1 class="font-weight-light">Marcos reyero</h1>
-                <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
-                <a class="btn btn-primary" href="#!">Call to Action!</a>
+                <img class="img-fluid rounded mb-4 mb-lg-1" 
+                src={% static 'img/blockchain.jpg' %}
+                alt="..." 
+                style="width: 100%; height: auto; max-height: 400px;" />
             </div>
-        </div>
-        <a class="btn btn-primary"
-                   href="https://wa.me/542619999999"
-                   target="_blank">WhatsApp</a>
+            <div class="col-md-4 mb-5">
+                <div class="card h-50" style="background-color: rgba(19, 19, 20, 0.776);">
+                    <div class="card-body">
+                        <h1 class="font-weight-light text-light">Marcos reyero</h1>
+                        <p class="text-light">Este es mi web, ¡échale un vistazo!</>
+                    </div>
+                </div>
             </div>
-        </div>
-        <!-- Call to Action-->
-        <div class="card text-white bg-secondary my-5 py-4 text-center">
-            <div class="card-body"><p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p></div>
+                        
         </div>
     </div>
+    <!-- Call to Action-->
+    <div class="card text-white bg-secondary my-5 py-4 text-center">
+        <div class="card-body"><p class="text-white m-0">Transformando infraestructuras, optimizando procesos</p></div>
+    </div>
 
-         <!-- Content Row-->
-        <div class="row gx-4 gx-lg-5">
-            {% include 'miapp/components/card.html' with titulo="Tarjeta 1" texto="Promociones" %}
-            {% include 'miapp/components/card.html' with titulo="Tarjeta 2" texto="Lorem ipsum dolor sit amet consectetur adipisicing elit. In perferendis repellat quo earum ut, ducimus repudiandae maxime eaque sint, omnis placeat ex necessitatibus rerum dicta itaque dolorem consequatur deleniti praesentium?" %}
-            {% include 'miapp/components/card.html' with titulo="Tarjeta 3" %}
-        </div>
+    <!-- Content Row-->
+    <div class="row gx-4 gx-lg-5">
+        {% include 'miapp/components/card.html' with titulo="Eficiencia" texto="Por la capacidad del código para ejecutarse de manera rápida y con un uso mínimo de recursos. Esto incluye el uso de algoritmos y estructuras de datos apropiadas, optimización de operaciones costosas, y minimizar el uso de memoria y procesamiento. Un código eficiente mejora la experiencia del usuario y reduce los costos de operación." %}
+        {% include 'miapp/components/card.html' with titulo="Mantenimiento" texto="Implica escribir el código de tal manera que sea fácil de actualizar, corregir y mejorar con el tiempo. Esto incluye el uso de estructuras de código modular, seguir los principios de diseño como SOLID, y escribir pruebas unitarias. Un código fácil de mantener puede adaptarse a nuevas necesidades y cambios sin causar problemas significativos." %}
+        {% include 'miapp/components/card.html' with titulo="Claridad" texto=" Es crucial para que otros desarrolladores (o incluso uno mismo en el futuro) puedan entender rápidamente qué hace el código. Esto se logra a través de una buena organización, nombres de variables y funciones significativos, y comentarios útiles. Un código claro facilita la colaboración y reduce la probabilidad de errores." %}
+    </div>
 {% endblock contenido %}

@@ -1,14 +1,25 @@
+<!-- project/miapp/templates/miapp/post_form.html -->
 {% extends 'miapp/base.html' %}
+
+{% block titulo %}
+    Crear nuevo post
+{% endblock titulo %}
+
 {% block contenido %}
-<h1>Crear nuevo post</h1>
-{% if user.is_authenticated %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar</button>
-</form>
-{% else %}
-<p>Debes iniciar sesión para crear un nuevo post. <a href="{% url 'miapp:login' %}">Iniciar sesión</a> o <a href="{% url 'miapp:register' %}">Registrarse</a></p>
-{% endif %}
-<a href="{% url 'miapp:post_list' %}">Volver a la lista</a>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h1 class="text-center">Crear nuevo post</h1>
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary">Guardar</button>        
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
