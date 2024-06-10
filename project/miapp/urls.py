@@ -1,5 +1,9 @@
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 
 app_name = 'miapp'
@@ -16,14 +20,11 @@ app_name = 'miapp'
 #    path('logout/', views.user_logout, name='logout'), # Página de contacto
 #    # Otras rutas de URL aquí
 #]
-from django.urls import path
-from django.contrib.auth import views as auth_views
-from . import views
-
 app_name = 'miapp'
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('about/', views.about_view, name='about'),
     path('contact/', views.contact, name='contact'),
     path('posts/', views.post_list, name='post_list'),
     path('post/<int:pk>/', views.post_detail, name='post_detail'),

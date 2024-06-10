@@ -1,0 +1,30 @@
+<!-- project/miapp/templates/miapp/about.html -->
+
+{% extends 'miapp/base.html' %}
+{% load static %}
+
+{% block titulo %}
+    {% include 'miapp/components/titulo_1.html' with titulo="About Us" %}
+{% endblock titulo %}
+
+{% block contenido %}
+<div class="container my-5">
+    <h1 class="text-center">About Us</h1>
+    <p class="lead text-center">Welcome to our company. We are dedicated to providing the best service possible.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non eros eu felis volutpat euismod. Donec vehicula, nisl et consequat blandit, enim nisl hendrerit lorem, eu consectetur sapien nisi vitae lorem.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non eros eu felis volutpat euismod. Donec vehicula, nisl et consequat blandit, enim nisl hendrerit lorem, eu consectetur sapien nisi vitae lorem.</p>
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 align-items-center my-5">
+            <div class="col-lg-7">
+                <img class="img-fluid rounded mb-4 mb-lg-0" src="{% static 'img/espace.webp' %}" alt="..." />
+            </div>
+            <div class="col-lg-5">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non eros eu felis volutpat euismod. Donec vehicula, nisl et consequat blandit, enim nisl hendrerit lorem, eu consectetur sapien nisi vitae lorem.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non eros eu felis volutpat euismod. Donec vehicula, nisl et consequat blandit, enim nisl hendrerit lorem, eu consectetur sapien nisi vitae lorem.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non eros eu felis volutpat euismod. Donec vehicula, nisl et consequat blandit, enim nisl hendrerit lorem, eu consectetur sapien nisi vitae lorem.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non eros eu felis volutpat euismod. Donec vehicula, nisl et consequat blandit, enim nisl hendrerit lorem, eu consectetur sapien nisi vitae lorem.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contenido %}

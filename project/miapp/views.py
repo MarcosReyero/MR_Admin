@@ -19,6 +19,10 @@ def post_list(request):
     posts = Post.objects.all()
     return render(request, 'miapp/post_list.html', {'posts': posts})
 
+def about_view(request):
+    return render(request, 'miapp/about.html')
+
+# views.py
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     comments = Comment.objects.filter(post=post)
@@ -29,7 +33,7 @@ def post_detail(request, pk):
             if form.is_valid():
                 comment = form.save(commit=False)
                 comment.post = post
-                comment.author = request.user  # Asignar el autor como el usuario logeado
+                comment.author = request.user
                 comment.save()
                 return redirect('miapp:post_detail', pk=post.pk)
         else:
@@ -38,14 +42,16 @@ def post_detail(request, pk):
     else:
         form = CommentForm()
 
-    return render(request, 'miapp/post_detail.html', {'post': post, 'comments': comments, 'form': form})    
+    return render(request, 'miapp/post_detail.html', {'post': post, 'comments': comments, 'form': form})
 
-@login_required(login_url='miapp:login')
+@login_required
 def post_create(request):
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST)  
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
             return redirect('miapp:post_list')
     else:
         form = PostForm()
