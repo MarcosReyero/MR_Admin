@@ -18,10 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from miapp import views  # Importa la vista home directamente
 
-app_name = 'miapp'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),  # La raíz apunta a la vista home
     path('miapp/', include('miapp.urls', namespace='miapp')),
+    path('productos/', include('producto.urls', namespace='productos')),
+
 ]
+

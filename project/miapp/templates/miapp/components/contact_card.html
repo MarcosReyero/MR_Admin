@@ -1,10 +1,13 @@
 <div class="col-md-4 mb-5">
-    <div class="card h-100">
+    <div class="card h-100 mb-lg-2" style="background-color: rgba(19, 19, 20, 0.958);">
+        {% if imagen %}
+        <img src="{{ imagen }}" class="card-img-top" alt="Card image">
+        {% endif %}
         <div class="card-body">
             <h2 class="card-title">{{ titulo }}</h2>
         </div>
         <div class="card-footer">
-            <a class="btn btn-primary btn-sm" href="{{enlace}}">contactanos!</a>
+            <a class="btn btn-primary btn-sm" href="{{ enlace }}">contactanos!</a>
         </div>
     </div>
 </div>

@@ -11,7 +11,18 @@ Posts
             <h1 class="font-weight-light text-light">Posts</h1>
         </div>
     </div>
-
+    
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <form method="GET" action="{% url 'miapp:post_list' %}">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Buscar posts..." value="{{ query|default:'' }}">
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
     <div class="row">
         {% for post in posts %}
         <div class="col-md-6 mb-4">
@@ -20,11 +31,16 @@ Posts
             {% include 'miapp/components/post_card.html' with title=post.title url=url author=post.author.username content=post.content created_at=post.created_at %}
             {% endwith %}
         </div>
+        {% empty %}
+        <div class="col-md-12">
+            <p class="text-center">No se encontraron posts que coincidan con tu búsqueda.</p>
+        </div>
         {% endfor %}
     </div>
+    
     <div class="row">
         <div class="col text-center">
-            <a class="btn btn-primary container" href="{% url 'miapp:post_create' %}">Crear nuevo post</a>
+            <a class="btn btn-primary" href="{% url 'miapp:post_create' %}">Crear nuevo post</a>
         </div>
     </div>
 </div>

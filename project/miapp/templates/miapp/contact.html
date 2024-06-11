@@ -1,30 +1,25 @@
 {% extends 'miapp/base.html' %}
+{% load static %}
+
 {% block titulo %}
-    Contact
+    Contacto
 {% endblock titulo %}
 
 {% block contenido %}
+    <div class="container">
+        <div class="card h-50 mb-lg-2" style="background-color: rgba(19, 19, 20, 0.919);">
+            <div class="card-body">
+                <h2 class="font-weight-light text-light">
+                    Ponte en contacto con nosotros a través de los siguientes enlaces
+                </h2>
+            </div>
+        </div>
 
-
-
-</ul>
-<div class="container">
-    <div class="card h-50 mb-lg-2" style="background-color: rgba(19, 19, 20, 0.776);">
-        <div class="card-body">
-            <h2 class="font-weight-light text-light">
-                Ponte en contacto con nosotros a través de los siguientes enlaces
-            </h2>
+        <!-- Content Row -->
+        <div class="row gx-4 gx-lg-5">
+            {% include 'miapp/components/contact_card.html' with titulo="LinkedIn" enlace="https://www.linkedin.com/" imagen=linkedin_image_url %}
+            {% include 'miapp/components/contact_card.html' with titulo="Instagram" enlace="https://www.instagram.com/" imagen=instagram_image_url %}
+            {% include 'miapp/components/contact_card.html' with titulo="Correo electrónico" enlace="mailto:reyeromateo@gmail.com" imagen=gmail_image_url %}
         </div>
     </div>
-
-
-<!-- Content Row-->
-        <div class="row gx-4 gx-lg-5 ">
-            {% include 'miapp/components/contact_card.html' with titulo="LinkedIn" enlace="https://www.linkedin.com/"  %}
-            {% include 'miapp/components/contact_card.html' with titulo="Instagram" enlace="https://www.instagram.com/" %}
-            {% include 'miapp/components/contact_card.html' with titulo="Correo electrónico" enlace="reyeromateo@gmail.com" %}
-        </div>
-
-
-</ul>
 {% endblock contenido %}

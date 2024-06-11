@@ -8,16 +8,37 @@ from .forms import RegisterForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.templatetags.static import static
+from django.db.models import Q
 
 def home(request):
     return render(request, 'miapp/index.html')
 
+
 def contact(request):
-    return render(request, 'miapp/contact.html')
+    context = {
+        'linkedin_image_url': static('img/linkedin1.png'),
+        'instagram_image_url': static('img/instagram1.png'),
+        'gmail_image_url': static('img/gmail3.png')
+    }
+    return render(request, 'miapp/contact.html', context)
 
 def post_list(request):
-    posts = Post.objects.all()
-    return render(request, 'miapp/post_list.html', {'posts': posts})
+    query = request.GET.get('q')
+    if query:
+        posts = Post.objects.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(author__username__icontains=query)
+        )
+    else:
+        posts = Post.objects.all()
+    
+    context = {
+        'posts': posts,
+        'query': query,
+    }
+    return render(request, 'miapp/post_list.html', context)
 
 def about_view(request):
     return render(request, 'miapp/about.html')

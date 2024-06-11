@@ -1,0 +1,15 @@
+{% extends 'miapp/base.html' %}
+
+{% block titulo %}
+    Lista de Productos
+{% endblock titulo %}
+
+{% block contenido %}
+    <h1>Lista de Productos</h1>
+    <ul>
+        {% for producto in productos %}
+            <li>{{ producto.nombre }} - {{ producto.precio }}</li>
+        {% endfor %}
+    </ul>
+{% endblock contenido %}
+
