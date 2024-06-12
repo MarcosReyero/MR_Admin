@@ -22,7 +22,7 @@ from miapp import views  # Importa la vista home directamente
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),  # La raíz apunta a la vista home
-    path('miapp/', include('miapp.urls', namespace='miapp')),
+    path('MR/', include('miapp.urls', namespace='miapp')),
     path('productos/', include('producto.urls', namespace='productos')),
 
 ]

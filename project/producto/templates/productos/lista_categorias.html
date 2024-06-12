@@ -1,0 +1,16 @@
+{% extends 'miapp/base.html' %}
+
+{% block contenido %}
+<div class="container">
+    <h2>Lista de Categorías</h2>
+    <ul>
+        {% for categoria in categorias %}
+            <li>
+                <a href="{% url 'producto:lista_productos_por_categoria' categoria.id %}">
+                    {{ categoria.nombre }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock contenido %}

@@ -1,15 +1,21 @@
 {% extends 'miapp/base.html' %}
 
-{% block titulo %}
-    Lista de Productos
-{% endblock titulo %}
-
 {% block contenido %}
-    <h1>Lista de Productos</h1>
-    <ul>
+<div class="container">
+    <h2>Lista de Productos</h2>
+    <div class="row">
         {% for producto in productos %}
-            <li>{{ producto.nombre }} - {{ producto.precio }}</li>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.nombre }}</h5>
+                        <p class="card-text"><strong>Precio:</strong> {{ producto.precio }}</p>
+                        <a href="{% url 'producto:detalle_producto.html' pk=producto.pk %}" class="btn btn-primary">Ver Detalles</a>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
+</div>
 {% endblock contenido %}
-
