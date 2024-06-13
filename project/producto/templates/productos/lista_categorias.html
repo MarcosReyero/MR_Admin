@@ -2,15 +2,13 @@
 
 {% block contenido %}
 <div class="container">
-    <h2>Lista de Categorías</h2>
-    <ul>
+    {% include 'productos/components/card_titulo.html' with titulo="Lista de Categorías" %}
+    <div class="row">
         {% for categoria in categorias %}
-            <li>
-                <a href="{% url 'producto:lista_productos_por_categoria' categoria.id %}">
-                    {{ categoria.nombre }}
-                </a>
-            </li>
+            <div class="col-md-4 mb-4">
+                {% include 'productos/components/card_categoria.html' with categoria=categoria color='#ffffff' opacity='1' %}
+            </div>
         {% endfor %}
-    </ul>
+    </div>
 </div>
 {% endblock contenido %}

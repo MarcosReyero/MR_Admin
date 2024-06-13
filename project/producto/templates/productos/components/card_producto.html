@@ -1,0 +1,14 @@
+<!-- card_producto.html -->
+
+<div class="card producto-card">
+    {% if producto.imagen %}
+        <img src="{{ producto.imagen.url }}" class="card-img-top producto-imagen"
+             alt="{{ producto.nombre }}"
+             style="max-width: 294px; max-height: 294px; object-fit: cover;">
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title">{{ producto.nombre }}</h5>
+        <p class="card-text"><strong>Precio:</strong> {{ producto.precio }}</p>
+        <a href="{% url 'producto:detalle_producto' pk=producto.pk %}" class="btn btn-primary">Ver Detalles</a>
+    </div>
+</div>

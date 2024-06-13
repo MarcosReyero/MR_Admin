@@ -6,11 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>
-        {% block title %}
-        MR
-        {% endblock title %}
-    </title>
+    <title>{% block title %}MR{% endblock title %}</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -18,7 +14,7 @@
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     <style>
         body {
-            background-image: url("{% static 'img/servers.jpg'  %}");
+            background-image: url("{% static 'img/servers.jpg' %}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;

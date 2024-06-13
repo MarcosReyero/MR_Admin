@@ -1,0 +1,33 @@
+<!-- card_categoria.html -->
+
+<style>
+    .card {
+        background-color: var(--color, #ffffff); /* Color de fondo, default blanco */
+        opacity: var(--opacity, 1); /* Opacidad, default 1 (100%) */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, opacity 0.3s ease;
+        text-align: center; /* Centra el texto */
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Estilos de texto */
+    a {
+        text-decoration: none; /* Sin subrayado en los enlaces */
+        color: #333; /* Color de texto */
+        font-size: 18px; /* Tamaño de fuente */
+        font-weight: bold; /* Negrita */
+        font-family: Arial, sans-serif; /* Familia de fuentes */
+    }
+</style>
+
+<div class="card" style="--color: {{ color }}; --opacity: {{ opacity }};">
+    <a href="{% url 'producto:lista_productos_por_categoria' categoria.id %}">
+        {{ categoria.nombre }}
+    </a>
+</div>

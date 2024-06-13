@@ -2,16 +2,22 @@
 
 {% block contenido %}
 <div class="container">
-    <h2>Lista de Productos</h2>
+    {% if categoria %}
+        {% include 'productos/components/card_titulo.html' with titulo="Productos en la categoría: " categoria_nombre=categoria.nombre %}
+    {% else %}
+        {% include 'productos/components/card_titulo.html' with titulo="Lista de Productos" %}
+    {% endif %}
     <div class="row">
         {% for producto in productos %}
             <div class="col-md-4">
-                <div class="card">
-                    <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+                <div class="card mb-4">
+                    {% if producto.imagen %}
+                        <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+                    {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">{{ producto.nombre }}</h5>
                         <p class="card-text"><strong>Precio:</strong> {{ producto.precio }}</p>
-                        <a href="{% url 'producto:detalle_producto.html' pk=producto.pk %}" class="btn btn-primary">Ver Detalles</a>
+                        <a href="{% url 'producto:detalle_producto' pk=producto.pk %}" class="btn btn-primary">Ver Producto</a>
                     </div>
                 </div>
             </div>

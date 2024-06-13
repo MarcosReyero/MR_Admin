@@ -1,3 +1,5 @@
+<!-- lista_productos_por_categoria.html -->
+
 {% extends 'miapp/base.html' %}
 
 {% block contenido %}
@@ -5,19 +7,10 @@
     <h2>Productos en la categoría: {{ categoria.nombre }}</h2>
     <div class="row">
         {% for producto in productos %}
-        <div class="col-md-4">
-            <div class="card">
-                {% if producto.imagen %}
-                <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title">{{ producto.nombre }}</h5>
-                    <p class="card-text">{{ producto.descripcion }}</p>
-                    <p class="card-text"><strong>Precio:</strong> {{ producto.precio }}</p>
-                </div>
+            <div class="col-md-4">
+                {% include 'productos/components/card_producto.html' %}
             </div>
-        </div>
         {% endfor %}
     </div>
 </div>
-{% endblock %}
+{% endblock contenido %}

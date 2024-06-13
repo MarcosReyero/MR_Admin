@@ -2,17 +2,15 @@
 
 {% block contenido %}
 <div class="container">
-    <h2>Detalles del Producto</h2>
+    {% include 'productos/components/card_titulo.html' with titulo="Detalles del Producto" %}
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 img-container" style="display: flex; justify-content: center; align-items: center;">
             {% if producto.imagen %}
-                <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="img-fluid">
+                <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="img-fluid" style="width: 100%; height: 500px; object-fit: contain;">
             {% endif %}
         </div>
         <div class="col-md-6">
-            <h3>{{ producto.nombre }}</h3>
-            <p><strong>Precio:</strong> {{ producto.precio }}</p>
-            <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+            {% include 'productos/components/card_detalles_producto.html' %}
         </div>
     </div>
 </div>

@@ -10,6 +10,108 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+/* styles.css */
+
+/* General styles for product images */
+.img-fluid {
+  width: 100%;
+  height: 500px;
+  object-fit: contain; /* Ensure the entire image is visible without being cropped */
+}
+
+/* Styles for screens smaller than 768px (e.g., mobile devices) */
+@media (max-width: 767px) {
+  .img-fluid {
+      height: auto; /* Adjust height automatically */
+      max-width: 100%; /* Ensure image does not exceed container's width */
+  }
+
+  .img-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+  }
+}
+
+/* Additional styles for the description card */
+.description-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-top: 0; /* Align to the top */
+  margin-left: -10px; /* Extend a bit to the left */
+}
+
+/* styles.css */
+
+/* Ensure all product cards are the same size */
+/* styles.css */
+
+.producto-card {
+  width: 100%;
+  height: 400px; /* Ajusta el tamaño de la tarjeta según tus necesidades */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border: 1px solid #ccc; /* Opcional: añade un borde para visualizar mejor las tarjetas */
+}
+
+.producto-imagen {
+  width: 100%;
+  height: 200px; /* Ajusta el tamaño de la imagen según tus necesidades */
+  object-fit: cover; /* Asegura que la imagen se ajuste dentro del contenedor sin distorsión */
+}
+
+/* Ensure the product card body fits within the card */
+
+
+
+
+.card-titulo {
+  color: rgb(243, 15, 15);
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #000;
+}
+/* Optional: force minimum height */
+.img-fluid {
+  width: 100%;
+  min-height: 500px;
+  max-height: 500px;
+  object-fit: cover;
+}
+/* Custom styles for product images */
+.img-fluid {
+  width: 100%;
+  height: 500px;
+  object-fit: contain; /* This ensures the entire image is visible without being cropped */
+}
+
+@media (max-width: 767px) {
+  /* Styles for screens smaller than 768px (e.g., mobile devices) */
+  .img-fluid {
+      height: auto; /* Adjust height automatically */
+      max-width: 100%; /* Ensure image does not exceed container's width */
+  }
+
+  .img-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+  }
+}
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
