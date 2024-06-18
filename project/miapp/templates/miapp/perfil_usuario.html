@@ -1,0 +1,18 @@
+{% extends 'miapp/base.html' %}
+
+{% block contenido %}
+<div class="container">
+    <h2>Perfil de Usuario</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="profile-picture">
+                <img src="{{ request.user.perfilusuario.foto_perfil.url }}" alt="Profile Image">
+            </div>
+            <label for="foto_perfil">Foto de Perfil:</label>
+            <input type="file" name="foto_perfil" class="form-control" id="foto_perfil">
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar Perfil</button>
+    </form>
+</div>
+{% endblock contenido %}
