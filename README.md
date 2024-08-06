@@ -1,51 +1,17 @@
-# Comandos
+# Mi Proyecto Django
 
-`mkdir nueva_carpeta`
-> Crea una carpeta llamada nueva_carpeta
+Este es un proyecto de aplicación web construido con Django y Django REST Framework. La aplicación permite a los usuarios gestionar publicaciones, comentarios y perfiles de usuario. También incluye un sistema de autenticación para usuarios y administradores.
 
-`ls`
-> Muestra la lista de archivos
+## Características
 
-`cd nueva_carpeta`
-> Cambia de carpeta
+- **Autenticación de Usuarios**: Registro, inicio de sesión y gestión de perfiles.
+- **Gestión de Publicaciones**: Crear, leer, actualizar y eliminar publicaciones.
+- **Comentarios**: Los usuarios pueden agregar comentarios a las publicaciones.
+- **Carrito de Compras**: Funcionalidad para agregar productos a un carrito de compras (integración con un sistema de productos).
 
-`pwd`
-> Muestra la ruta actual
+## Tecnologías
 
-`python -m venv .venv`
-> Crea un entorno virtual llamado .venv
-
-`source .venv/bin/activate`
-> Activa el entorno virtual en Linux o Mac
-
-`.\venv\Scripts\activate`
-> Activa el entorno virtual en Windows
-
-`pip list`
-> Muestra la lista de paquetes disponibles en el entorno virtual
-
-`pip install django`
-> Instala Django
-
-`django-admin startproject config .`
-> Crea un proyecto en el directorio actual
-
-`python manage.py runserver`
-> Ejecuta el servidor
-
-`python manage.py startapp app`
-> Crea una nueva aplicación llamada app
-
-`python manage.py makemigrations`
-> Crea las migraciones, que son archivos Python encargados de la base de datos
-
-`python manage.py migrate`
-> Ejecuta las migraciones, para que se realicen los cambios en la base de datos
-
-`python manage.py createsuperuser`
-> Crea un usuario administrador para acceder a 127.0.0.1:8000/admin
-
-## Crear archivo de requisitos: requirements.txt
-
-`pip freeze >> requirements.txt`
-`pip install -r requirements.txt`
+- **Backend**: Django 5.0.7, Django REST Framework
+- **Frontend**: HTML, CSS, Bootstrap 5
+- **Base de Datos**: SQLite3
+- **Otras Herramientas**: Pillow para manejo de imágenes
