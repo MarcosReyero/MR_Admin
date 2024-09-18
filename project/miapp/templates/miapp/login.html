@@ -1,4 +1,5 @@
 {% extends 'miapp/base.html' %}
+{% load form_filters %}
 
 {% block contenido %}
 <div class="container mt-5">
@@ -11,13 +12,13 @@
                 <div class="card-body">
                     <form method="post">
                         {% csrf_token %}
-                        <div class="mb-3">
+                        <div class="mb-3 form-group">
                             <label for="{{ form.username.id_for_label }}" class="form-label">{{ form.username.label }}</label>
-                            {{ form.username }}
+                            {{ form.username|add_class:"form-control" }}
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 form-group">
                             <label for="{{ form.password.id_for_label }}" class="form-label">{{ form.password.label }}</label>
-                            {{ form.password }}
+                            {{ form.password|add_class:"form-control" }}
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
