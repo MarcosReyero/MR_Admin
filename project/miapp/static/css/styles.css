@@ -16,6 +16,34 @@
 /* General styles for product images */
 /* En tu archivo CSS */
 
+
+
+/* Estilo para el body */
+body {
+  background-image: url('/static/img/background-main.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Estilo para el main para ocupar el espacio disponible */
+main {
+  flex: 1;
+}
+
+.footer {
+  background-color: #343a40;
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+  margin-top: auto; /* Asegura que el footer esté en la parte inferior */
+}
+
+
 .navbar-profile img {
   max-width: 10px; /* Tamaño máximo deseado */
   max-height: 10px;
@@ -3942,6 +3970,21 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: space-between;
 }
+
+.navbar-brand-container {
+  display: flex;
+  align-items: center; /* Alinea verticalmente el logo y el texto */
+  position: relative;
+  left: -70px; 
+}
+.navbar-brand-container img {
+  width: 100px; /* Ajusta el tamaño del logo */
+  height: auto; /* Mantiene la relación de aspecto del logo */
+  margin-right: 10px; /* Ajusta el espacio entre el logo y el texto */
+  margin-left: -40px; /* Mueve el logo hacia la izquierda si es necesario */
+}
+
+
 .navbar-brand {
   padding-top: var(--bs-navbar-brand-padding-y);
   padding-bottom: var(--bs-navbar-brand-padding-y);
@@ -4377,10 +4420,55 @@ textarea.form-control-lg {
   border-top: 0;
 }
 
-.card-body {
-  flex: 1 1 auto;
-  padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
-  color: var(--bs-card-color);
+
+
+/* Asegurarse de que el formulario ocupe todo el ancho disponible */
+.card-body form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Espacio entre los campos del formulario */
+  margin-bottom: 0rem;
+}
+/* styles.css */
+
+/* Asegura que el botón esté centrado y ocupe todo el ancho disponible */
+.card-body .text-center {
+  display: flex;
+  justify-content: center; /* Centra el contenido horizontalmente */  margin-bottom: 0rem;
+}
+
+.card-body .btn {
+  width: 100%; /* Asegura que el botón ocupe todo el ancho del contenedor */
+}
+
+/* Centrar las etiquetas y campos del formulario */
+.card-body .form-label {
+  text-align: center; /* Centrar las etiquetas */
+}
+
+.card-body .form-control {
+  width: 100%; /* Asegurar que los campos ocupen todo el ancho disponible */
+}
+
+/* Asegurar que los campos del formulario no se rompan al cambiar la resolución */
+.card-body .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Estilos adicionales para el botón */
+.card-body .btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Ajustar el tamaño del contenedor en pantallas más pequeñas */
+@media (max-width: 768px) {
+  .col-md-6 {
+      max-width: 90%; /* Ajustar el tamaño en pantallas más pequeñas */
+  }
 }
 
 .card-title {
