@@ -1,6 +1,6 @@
-# Mi Proyecto Django
+# Mi Proyecto Django - Tercera pre-entrega
 
-Este es un proyecto de aplicación web construido con Django y Django REST Framework. La aplicación permite a los usuarios gestionar publicaciones, comentarios y perfiles de usuario. También incluye un sistema de autenticación para usuarios y administradores.
+Este es un proyecto de aplicación web construido con Django. La aplicación permite a los usuarios gestionar publicaciones, comentarios y perfiles de usuario. También incluye un sistema de autenticación para usuarios y administradores.
 
 ## Características
 
