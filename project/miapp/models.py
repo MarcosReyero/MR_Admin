@@ -21,7 +21,7 @@ class Comment(models.Model):
 
 class PerfilUsuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    foto_perfil = models.ImageField(upload_to='perfil/', blank=True, null=True)
+    foto_perfil = models.ImageField(upload_to='perfil_images/', blank=True, null=True)
 
     def __str__(self):
         return self.user.username

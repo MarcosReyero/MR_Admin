@@ -12,14 +12,110 @@
  */
 
 /* styles.css */
+/* Estilo para el Header */
+.header-custom {
+  background-color: rgba(52, 58, 64, 0.621); /* color de fondo oscuro con opacidad */
+  background-size: cover;
+  height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+  padding-top: 100px; /* Ajusta este valor para el padding superior que desees */
+  margin-bottom: 0; /* Asegúrate de que no haya margen inferior */
+  display: flex; /* Mantiene el flexbox para organizar el contenido */
+  flex-direction: column; /* Cambiado a columna para alinear elementos verticalmente */
+  justify-content: flex-start; /* Alinea los elementos hacia la parte superior */
+}
 
-/* General styles for product images */
-/* En tu archivo CSS */
+/* Estilo para los encabezados */
+.header-custom h1 {
+  color: rgb(255, 255, 255);
+  font-size: 2.5rem; /* Tamaño del título principal */
+  font-weight: 700; /* Negrita */
+  margin-bottom: 0.5rem; /* Margen inferior */
+}
 
+/* Estilo para los párrafos */
+.header-custom p {
+  font-size: 1.25rem; /* Tamaño de texto del párrafo */
+  font-weight: 400; /* Peso del texto */
+  margin-bottom: 1.5rem; /* Margen inferior */
+  opacity: 0.8; /* Opacidad del texto */
+  color: var(--bs-white);
+}
 
+/* Estilo para los botones */
+.header-custom .btn {
+  padding: 0.75rem 1.5rem; /* Padding para los botones */
+  font-size: 1rem; /* Tamaño de texto del botón */
+  border-radius: 0.5rem; /* Bordes redondeados */
+  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
+}
 
+/* Estilo para el botón principal */
+.header-custom .btn-primary {
+  background-color: #007bff; /* Color de fondo del botón */
+  color: white; /* Color de texto del botón */
+}
+
+/* Estilo para el botón de outline */
+.header-custom .btn-outline-light {
+  border: 2px solid white; /* Borde blanco */
+  color: white; /* Color de texto */
+}
+
+/* Efecto hover para los botones */
+.header-custom .btn:hover {
+  background-color: white; /* Color de fondo en hover */
+  color: #007bff; /* Color de texto en hover */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .header-custom h1 {
+    font-size: 2rem; /* Ajusta el tamaño del título para pantallas pequeñas */
+  }
+
+  .header-custom p {
+    font-size: 1rem; /* Ajusta el tamaño del párrafo para pantallas pequeñas */
+  }
+}
+
+.form-container {
+  max-width: 600px; /* Ancho máximo del formulario */
+  margin: 1rem auto; /* Centrar el formulario y añadir espacio arriba y abajo */
+  padding: 1rem; /* Espaciado interno */
+  background-color: #f9f9f9; /* Color de fondo */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.form-container h2 {
+  font-size: 24px; /* Tamaño de fuente del título */
+  margin-bottom: 1rem; /* Espaciado debajo del título */
+}
+
+.form-container .form-label {
+  font-weight: bold; /* Negrita en las etiquetas */
+}
+
+.form-container .btn {
+  width: 100%; /* Botón ocupa todo el ancho */
+  padding: 0.75rem; /* Relleno del botón */
+  font-size: 16px; /* Tamaño de fuente del botón */
+}
+
+.form-container .form-control {
+  border-radius: 4px; /* Bordes redondeados en los inputs */
+  border: 1px solid #ccc; /* Bordes suaves */
+}
+
+.form-container .form-control:focus {
+  border-color: #007bff; /* Color de borde al enfocar */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra al enfocar */
+}
+.section_1-bg {
+  background-color: rgba(42, 44, 46, 0.744); /* color de fondo oscuro con opacidad */
+  
 /* Estilo para el body */
-body {
+}body {
   background-image: url('/static/img/background-main.jpg');
   background-size: cover;
   background-position: center;
@@ -43,29 +139,32 @@ main {
   margin-top: auto; /* Asegura que el footer esté en la parte inferior */
 }
 
-
-.navbar-profile img {
-  max-width: 10px; /* Tamaño máximo deseado */
-  max-height: 10px;
+.navbar {
+  padding: 10px 20px; /* Espaciado interno */
 }
 
-.perfil-img {
-  max-width: 40px !important;
-  max-height: 40px !important;
-  border-radius: 50% !important; /* Para hacerla circular */
+/* Enlace de perfil */
+.navbar-profile-link {
+  color: white; /* Color del texto */
+  margin-right: 10px; /* Espacio entre el texto y la imagen */
 }
 
-/* Estilos para la imagen de perfil en la página de perfil */
-.profile-picture {
-  max-width: 100px; /* Tamaño máximo deseado */
-  max-height: 100px;
-}
-.img-fluid {
-  width: 100%;
-  height: 500px;
-  object-fit: contain; /* Ensure the entire image is visible without being cropped */
+/* Estilo de la imagen de perfil */
+.navbar-profile-img {
+  width: 50px; /* Tamaño deseado */
+  height: 50px;
+  border-radius: 50%; /* Para hacerla circular */
+  object-fit: cover; /* Asegura que la imagen se recorte bien */
 }
 
+/* Para asegurarnos de que la sección de perfil esté alineada a la derecha */
+.navbar-profile {
+  display: flex;
+  align-items: center; /* Centrar verticalmente */
+  margin-left: auto; /* Empujar la sección hacia la derecha */
+}
+
+/* Ajustes para la imagen del perfil en la navbar */
 /* Styles for screens smaller than 768px (e.g., mobile devices) */
 @media (max-width: 767px) {
   .img-fluid {

@@ -75,19 +75,35 @@ class PerfilUsuarioView(LoginRequiredMixin, View):
         perfil_usuario_obj = getattr(request.user, 'perfilusuario', None)
         usuario_form = UsuarioForm(request.POST, instance=request.user)
         perfil_form = PerfilUsuarioForm(request.POST, request.FILES, instance=perfil_usuario_obj)
-        
+
         if usuario_form.is_valid() and perfil_form.is_valid():
-            perfil_obj = perfil_form.save(commit=False)
-            perfil_obj.user = request.user
-            perfil_obj.save()
-            usuario_form.save()
-            messages.success(request, 'Perfil actualizado correctamente.')
-            return redirect('miapp:perfil_usuario')
-        else:
-            messages.error(request, 'Por favor, corrige los errores en el formulario.')
-            return render(request, 'miapp/perfil_usuario.html', {
-                'usuario_form': usuario_form,
-                'perfil_form': perfil_form,
+            usuario_form.save()  # Actualiza el usuario
+            perfil_form.save()   # Actualiza el perfil
+            return redirect('miapp:perfil_usuario')  # Redirigir a la misma página o donde prefieras
+
+        return render(request, 'miapp/perfil_usuario.html', {
+            'usuario_form': usuario_form,
+            'perfil_form': perfil_form,
+        })    
+        
+        def post(self, request):
+
+            perfil_usuario_obj = getattr(request.user, 'perfilusuario', None)
+            usuario_form = UsuarioForm(request.POST, instance=request.user)
+            perfil_form = PerfilUsuarioForm(request.POST, request.FILES, instance=perfil_usuario_obj)
+            
+            if usuario_form.is_valid() and perfil_form.is_valid():
+                perfil_obj = perfil_form.save(commit=False)
+                perfil_obj.user = request.user
+                perfil_obj.save()
+                usuario_form.save()
+                messages.success(request, 'Perfil actualizado correctamente.')
+                return redirect('miapp:perfil_usuario')
+            else:
+                messages.error(request, 'Por favor, corrige los errores en el formulario.')
+                return render(request, 'miapp/perfil_usuario.html', {
+                    'usuario_form': usuario_form,
+                    'perfil_form': perfil_form,
             })
 class PostListView(View):
     def get(self, request):

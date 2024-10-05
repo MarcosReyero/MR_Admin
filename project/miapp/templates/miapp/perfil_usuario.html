@@ -7,10 +7,14 @@
         {% csrf_token %}
         <div class="form-group">
             <div class="profile-picture">
-                <img src="{{ request.user.perfilusuario.foto_perfil.url }}" alt="Profile Image">
+                {% if request.user.perfilusuario.foto_perfil %}
+                    <img src="{{ request.user.perfilusuario.foto_perfil.url }}" alt="Profile Image" class="img-fluid">
+                {% else %}
+                    <p>No tienes una foto de perfil.</p>
+                {% endif %}
             </div>
             <label for="foto_perfil">Foto de Perfil:</label>
-            <input type="file" name="foto_perfil" class="form-control" id="foto_perfil">
+            <input type="file" name="foto_perfil" class="form-control" id="foto_perfil" accept="image/*">
         </div>
         <button type="submit" class="btn btn-primary">Actualizar Perfil</button>
     </form>

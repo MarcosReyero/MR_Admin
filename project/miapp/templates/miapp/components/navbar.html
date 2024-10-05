@@ -6,7 +6,7 @@
             <img src="{% static 'assets/brand/mr.svg' %}" alt="Logo">
             <span>MR: Administracion</span>
         </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -29,9 +29,6 @@
                     <a class="nav-link" href="{% url 'miapp:post_create' %}">New Post</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'miapp:perfil_usuario' %}">Perfil</a>
-                </li>
-                <li class="nav-item">
                     <form method="POST" action="{% url 'miapp:logout' %}">
                         {% csrf_token %}
                         <button class="btn btn-link nav-link" type="submit">Logout</button>
@@ -46,12 +43,13 @@
                 </li>
                 {% endif %}
             </ul>
-
-            <!-- Caja de búsqueda a la derecha -->
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
-            </form>
+            <!-- Sección de perfil a la derecha -->
+            <div class="navbar-profile d-flex align-items-center ms-auto">
+                <a href="{% url 'miapp:perfil_usuario' %}" class="navbar-profile-link">Perfil</a>
+                {% if request.user.perfilusuario.foto_perfil %}
+                    <img src="{{ request.user.perfilusuario.foto_perfil.url }}" alt="Foto de perfil" class="navbar-profile-img">
+                {% endif %}
+            </div>
         </div>
     </div>
 </nav>
