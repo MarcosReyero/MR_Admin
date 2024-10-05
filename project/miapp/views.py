@@ -5,153 +5,173 @@ from django.db.models import Q
 from django.templatetags.static import static
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
+from django.views import View
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
+from django.urls import reverse_lazy
 from .forms import PostForm, CommentForm, RegisterForm, UsuarioForm, PerfilUsuarioForm
 from .models import Post, Comment, PerfilUsuario
-from producto.models import Carrito, Producto  # Asumo que producto.models está correctamente importado
+from producto.models import Carrito, Producto
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse
+from django.utils.decorators import method_decorator
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.contrib import messages
 
+class HomeView(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'miapp/index.html')
 
-@login_required
-def home(request):
-    return render(request, 'miapp/index.html')
+class ContactView(View):
+    def get(self, request):
+        return render(request, 'miapp/contact.html')
 
+    def post(self, request):
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
 
-def contact(request):
-    context = {
-        'linkedin_image_url': static('img/linkedin1.png'),
-        'instagram_image_url': static('img/instagram1.png'),
-        'gmail_image_url': static('img/gmail3.png')
-    }
-    return render(request, 'miapp/contact.html', context)
+        template = render_to_string('email-template.html', {
+            'name': name,
+            'email': email,
+            'subject': subject,
+            'message': message
+        })
 
+        email_sender = EmailMessage(
+            subject,
+            template,
+            'MR-ADMIN <' + settings.EMAIL_HOST_USER + '>',  # Aquí especificas el nombre que aparecerá como remitente
+            ['reyeromateo@gmail.com']
+        )
+        email_sender.content_subtype = 'html'
+        email_sender.fail_silently = False
 
-@login_required
-def perfil_usuario(request):
-    try:
-        perfil_usuario_obj = request.user.perfilusuario
-    except PerfilUsuario.DoesNotExist:
-        perfil_usuario_obj = None
+        try:
+            email_sender.send()
+            messages.success(request, 'El correo electrónico se envió correctamente')
+        except Exception as e:
+            messages.error(request, f'Ocurrió un error al enviar el correo: {str(e)}')
 
-    if request.method == 'POST':
+        return redirect('miapp:contact')           
+class PerfilUsuarioView(LoginRequiredMixin, View):
+    def get(self, request):
+        perfil_usuario_obj = getattr(request.user, 'perfilusuario', None)
+        usuario_form = UsuarioForm(instance=request.user)
+        perfil_form = PerfilUsuarioForm(instance=perfil_usuario_obj)
+        return render(request, 'miapp/perfil_usuario.html', {
+            'usuario_form': usuario_form,
+            'perfil_form': perfil_form,
+        })
+
+    def post(self, request):
+        perfil_usuario_obj = getattr(request.user, 'perfilusuario', None)
         usuario_form = UsuarioForm(request.POST, instance=request.user)
         perfil_form = PerfilUsuarioForm(request.POST, request.FILES, instance=perfil_usuario_obj)
+        
         if usuario_form.is_valid() and perfil_form.is_valid():
             perfil_obj = perfil_form.save(commit=False)
             perfil_obj.user = request.user
             perfil_obj.save()
             usuario_form.save()
             messages.success(request, 'Perfil actualizado correctamente.')
-            return redirect('miapp:perfil_usuario')  # Ajustado al namespace si lo tienes así en urls.py
+            return redirect('miapp:perfil_usuario')
         else:
             messages.error(request, 'Por favor, corrige los errores en el formulario.')
-    else:
-        usuario_form = UsuarioForm(instance=request.user)
-        perfil_form = PerfilUsuarioForm(instance=perfil_usuario_obj)
+            return render(request, 'miapp/perfil_usuario.html', {
+                'usuario_form': usuario_form,
+                'perfil_form': perfil_form,
+            })
+class PostListView(View):
+    def get(self, request):
+        query = request.GET.get('q')
+        if query:
+            posts = Post.objects.filter(
+                Q(title__icontains=query) |
+                Q(content__icontains=query) |
+                Q(author__username__icontains=query)
+            )
+        else:
+            posts = Post.objects.all()
+        
+        context = {
+            'posts': posts,
+            'query': query,
+        }
+        return render(request, 'miapp/post_list.html', context)
 
-    return render(request, 'miapp/perfil_usuario.html', {
-        'usuario_form': usuario_form,
-        'perfil_form': perfil_form,
-    })
+class AboutView(View):
+    def get(self, request):
+        return render(request, 'miapp/about.html')
 
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'miapp/post_detail.html'
 
-@login_required
-def ver_carrito(request):
-    carrito = Carrito.objects.filter(usuario=request.user)
-    total = sum(item.producto.precio * item.cantidad for item in carrito)
-    return render(request, 'miapp/ver_carrito.html', {'carrito': carrito, 'total': total})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = Comment.objects.filter(post=self.object)
+        context['form'] = CommentForm()
+        return context
 
-
-@login_required
-def agregar_al_carrito(request, producto_id):
-    producto = get_object_or_404(Producto, id=producto_id)
-    carrito, created = Carrito.objects.get_or_create(usuario=request.user, producto=producto)
-    if not created:
-        carrito.cantidad += 1
-        carrito.save()
-    return redirect('producto:detalle_producto', pk=producto_id)
-
-
-def post_list(request):
-    query = request.GET.get('q')
-    if query:
-        posts = Post.objects.filter(
-            Q(title__icontains=query) |
-            Q(content__icontains=query) |
-            Q(author__username__icontains=query)
-        )
-    else:
-        posts = Post.objects.all()
-
-    context = {
-        'posts': posts,
-        'query': query,
-    }
-    return render(request, 'miapp/post_list.html', context)
-
-
-def about_view(request):
-    return render(request, 'miapp/about.html')
-
-
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    comments = Comment.objects.filter(post=post)
-
-    if request.method == 'POST':
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
         if request.user.is_authenticated:
             form = CommentForm(request.POST)
             if form.is_valid():
                 comment = form.save(commit=False)
-                comment.post = post
+                comment.post = self.object
                 comment.author = request.user
                 comment.save()
-                return redirect('miapp:post_detail', pk=post.pk)
+                return redirect('miapp:post_detail', pk=self.object.pk)
         else:
-            messages.warning(request, 'Debes estar logeado para comentar en posts. Por favor, inicia sesión o regístrate.')
+            messages.warning(request, 'Debes estar logeado para comentar en posts.')
             return redirect('miapp:login')
-    else:
-        form = CommentForm()
 
-    return render(request, 'miapp/post_detail.html', {'post': post, 'comments': comments, 'form': form})
+class PostCreateView(LoginRequiredMixin, CreateView):
+    form_class = PostForm
+    template_name = 'miapp/post_form.html'
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
-@login_required
-def post_create(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect('miapp:post_list')
-    else:
-        form = PostForm()
-    return render(request, 'miapp/post_form.html', {'form': form})
+    def get_success_url(self):
+        return reverse('miapp:post_list')
 
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    template_name = 'miapp/post_confirm_delete.html'
 
-@login_required
-def post_delete(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method == 'POST':
-        post.delete()
-        return redirect('miapp:post_list')
-    return render(request, 'miapp/post_confirm_delete.html', {'post': post})
+    def get_success_url(self):
+        return reverse('miapp:post_list')
 
+class RegisterView(View):
+    def get(self, request):
+        form = RegisterForm()
+        return render(request, 'miapp/register.html', {'form': form})
 
-def register(request):
-    if request.method == 'POST':
+    def post(self, request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('miapp:home')
-    else:
-        form = RegisterForm()
-    return render(request, 'miapp/register.html', {'form': form})
+        return render(request, 'miapp/register.html', {'form': form})
 
+class UserLoginView(View):
+    def get(self, request):
+        form = AuthenticationForm()
+        return render(request, 'miapp/login.html', {'form': form})
 
-def user_login(request):
-    if request.method == 'POST':
+    def post(self, request):
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
@@ -160,12 +180,11 @@ def user_login(request):
             if user is not None:
                 login(request, user)
                 return redirect('miapp:home')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'miapp/login.html', {'form': form})
+        return render(request, 'miapp/login.html', {'form': form})
+
+class UserLogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('miapp:home')
 
 
-@login_required
-def user_logout(request):
-    logout(request)
-    return redirect('miapp:home')

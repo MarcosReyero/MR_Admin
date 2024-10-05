@@ -6,20 +6,54 @@
 {% endblock titulo %}
 
 {% block contenido %}
-    <div class="container">
-        <div class="card h-50 mb-lg-2" style="background-color: rgba(19, 19, 20, 0.919);">
-            <div class="card-body">
-                <h2 class="font-weight-light text-light">
-                    Ponte en contacto con nosotros a través de los siguientes enlaces
-                </h2>
-            </div>
-        </div>
+<div class="row justify-content-center">
+    <div class="col-12 col-md-6 p-5">
+        <h2>Formulario de Contacto</h2>
+        <hr>
+        <form action="{% url 'miapp:contact' %}" method="post" class="was-validated" novalidate>
+            {% csrf_token %}
 
-        <!-- Content Row -->
-        <div class="row gx-4 gx-lg-5">
-            {% include 'miapp/components/contact_card.html' with titulo="LinkedIn" enlace="https://www.linkedin.com/" imagen=linkedin_image_url %}
-            {% include 'miapp/components/contact_card.html' with titulo="Instagram" enlace="https://www.instagram.com/" imagen=instagram_image_url %}
-            {% include 'miapp/components/contact_card.html' with titulo="Correo electrónico" enlace="mailto:reyeromateo@gmail.com" imagen=gmail_image_url %}
-        </div>
+            <!-- mensajes -->
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre y Apellido</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback">Introduzca su nombre y apellido</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback">Introduzca su Correo Electrónico válido</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="subject" class="form-label">Asunto</label>
+                <input type="text" class="form-control" id="subject" name="subject" required>
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback">Introduzca el motivo de su mensaje</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="message" class="form-label">Mensaje</label>
+                <textarea class="form-control" name="message" id="message" rows="10" required></textarea>
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback">Introduzca el mensaje</div>
+            </div>
+            <button class="btn btn-primary" type="submit">Enviar Mensaje</button>
+        </form>
     </div>
+</div>
+
+<script src="{% static 'js/contact.js' %}"></script>
 {% endblock contenido %}
