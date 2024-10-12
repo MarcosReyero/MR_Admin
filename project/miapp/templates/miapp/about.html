@@ -2,23 +2,22 @@
 {% load static %}
 
 {% block titulo %}
-    {% include 'miapp/components/titulo_1.html' with titulo="About Us" %}
+    {% include 'miapp/components/titulo_1.html' with titulo="About" %}
 {% endblock titulo %}
 
 {% block contenido %}
 <div class="container my-2" style="background-color: rgba(0, 0, 0, 0.703); border: none;">
-    <h1 class="text-center">About Us</h1>
-    <p class="lead text-center">Welcome to our company. We are dedicated to providing the best service possible.</p>
-    <div class="container px-4 px-lg-5">
+    <h1 class="text-center">Acerca de mí</h1>
+    <div class="container px-2 px-lg-5 mb-2">
         <div class="row gx-4 gx-lg-5 align-items-center my-5">
             <div class="col-lg-7">
-                <img class="img-fluid rounded mb-4 mb-lg-0" src="{% static 'img/diagram.jpg' %}" alt="..." />
+                <img class="img-fluid rounded custom-spacing" src="{% static 'img/about/about_image.jpeg' %}" alt="..." />
             </div>
             <div class="col-lg-5">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non eros eu felis volutpat euismod. Donec vehicula, nisl et consequat blandit, enim nisl hendrerit lorem, eu consectetur sapien nisi vitae lorem.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non eros eu felis volutpat euismod. Donec vehicula, nisl et consequat blandit, enim nisl hendrerit lorem, eu consectetur sapien nisi vitae lorem.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non eros eu felis volutpat euismod. Donec vehicula, nisl et consequat blandit, enim nisl hendrerit lorem, eu consectetur sapien nisi vitae lorem.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non eros eu felis volutpat euismod. Donec vehicula, nisl et consequat blandit, enim nisl hendrerit lorem, eu consectetur sapien nisi vitae lorem.</p>
+                <p>Soy un apasionado de la tecnología, especialmente del entorno backend. Me encanta resolver problemas complejos y crear soluciones eficientes que mejoren la experiencia del usuario. Mi enfoque proactivo me impulsa a buscar constantemente nuevas oportunidades para aprender y crecer en este campo en constante evolución.</p>
+                <p>En el ámbito profesional, tengo experiencia en el desarrollo de aplicaciones robustas y escalables, utilizando tecnologías como Django, Python, y bases de datos relacionales. Estoy siempre atento a las últimas tendencias en desarrollo de software, lo que me permite aportar ideas innovadoras y prácticas recomendadas a los proyectos en los que participo.</p>
+                <p>Mis pasatiempos incluyen la lectura sobre filosofía, donde exploro diferentes corrientes de pensamiento y conceptos que me ayudan a ampliar mi perspectiva y a abordar los problemas desde ángulos diversos. Además, disfruto hacer música, lo que me permite expresar mi creatividad y desarrollar habilidades de colaboración.</p>
+                <p>Estoy emocionado por la posibilidad de contribuir a equipos dinámicos y desafiantes, donde pueda seguir aprendiendo y aportando valor a través de la tecnología.</p>
             </div>
         </div>
     </div>
