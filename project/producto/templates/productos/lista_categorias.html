@@ -1,7 +1,7 @@
 {% extends 'miapp/base.html' %}
 
 {% block contenido %}
-<div class="container">
+<div class="container mt-2">
     {% include 'productos/components/card_titulo.html' with titulo="Lista de Categorías" %}
     <div class="row">
         {% for categoria in categorias %}

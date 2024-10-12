@@ -1,10 +1,9 @@
-<!-- detalle_producto.html -->
-
 {% extends 'miapp/base.html' %}
 
 {% block contenido %}
 <div class="container">
-    <h2>Detalles del Producto</h2>
+    <h2 class="text-center bg-dark p-2 mt-1" ">Detalles del Producto</h2> 
+    
     <div class="row">
         <div class="col-md-6">
             {% if producto.imagen %}
@@ -15,11 +14,7 @@
             {% include 'productos/components/card_detalles_producto.html' %}
             <form action="{% url 'producto:agregar_al_carrito' producto.pk %}" method="post">
                 {% csrf_token %}
-                <div class="form-group">
-                    <label for="cantidad">Cantidad:</label>
-                    <input type="number" id="cantidad" name="cantidad" value="1" min="1">
-                </div>
-                <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
+                <button type="submit" class="btn btn-primary mt-2">Consultar Disponibilidad</button>
             </form>
         </div>
     </div>

@@ -16,17 +16,24 @@ class ListaProductosView(View):
 class ListaProductosPorCategoriaView(View):
     def get(self, request, categoria_id=None):
         categoria = None
-        productos = Producto.objects.all()
+        productos = Producto.objects.all() 
+        hay_productos = False 
+
         if categoria_id:
             categoria = get_object_or_404(Categoria, id=categoria_id)
-            productos = productos.filter(categoria=categoria)
+            productos = productos.filter(categoria=categoria)  # Filtrar productos por categoría
+
+     
+        if productos.exists():
+            hay_productos = True
 
         context = {
             'categoria': categoria,
             'productos': productos,
+            'hay_productos': hay_productos,  # Añadimos la variable al contexto
         }
         return render(request, 'productos/lista_productos.html', context)
-
+        
 class DetalleProductoView(View):
     def get(self, request, pk):
         producto = get_object_or_404(Producto, pk=pk)

@@ -1,15 +1,20 @@
-
 {% extends 'miapp/base.html' %}
 
 {% block contenido %}
 <div class="container">
     <h2>Productos en la categoría: {{ categoria.nombre }}</h2>
     <div class="row">
-        {% for producto in productos %}
-            <div class="col-md-4">
-                {% include 'productos/components/card_producto.html' %}
+        {% if not hay_productos %}
+            <div class="col-12 text-center">
+                <p>No hay productos en esta categoría.</p>
             </div>
-        {% endfor %}
+        {% else %}
+            {% for producto in productos %}
+                <div class="col-md-4">
+                    {% include 'productos/components/card_producto.html' %}
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 </div>
 {% endblock contenido %}
