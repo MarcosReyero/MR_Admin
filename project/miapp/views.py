@@ -23,9 +23,11 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.contrib import messages
+from django.core.exceptions import ValidationError
+import os
 
 
-class HomeView(LoginRequiredMixin, View):
+class HomeView( View):
     def get(self, request):
         productos_destacados = Producto.objects.filter(destacado=True) 
 
@@ -82,34 +84,31 @@ class PerfilUsuarioView(LoginRequiredMixin, View):
         perfil_form = PerfilUsuarioForm(request.POST, request.FILES, instance=perfil_usuario_obj)
 
         if usuario_form.is_valid() and perfil_form.is_valid():
-            usuario_form.save()  # Actualiza el usuario
-            perfil_form.save()   # Actualiza el perfil
-            return redirect('miapp:perfil_usuario')  # Redirigir a la misma página o donde prefieras
+            # Verificar si hay una foto antes de intentar acceder a cleaned_data
+            foto = perfil_form.cleaned_data.get('foto_perfil')  # Usa el nombre correcto
+            if foto:
+                # Realiza la validación de la imagen aquí si es necesario
+                self.validate_image(foto)
+
+            perfil_form.save()  
+            usuario_form.save()  
+            messages.success(request, 'Perfil actualizado correctamente.')
+            return redirect('miapp:perfil_usuario')
+        else:
+            messages.error(request, 'Por favor, corrige los errores en el formulario.')
 
         return render(request, 'miapp/perfil_usuario.html', {
             'usuario_form': usuario_form,
             'perfil_form': perfil_form,
-        })    
-        
-    def post(self, request):
+        })
 
-            perfil_usuario_obj = getattr(request.user, 'perfilusuario', None)
-            usuario_form = UsuarioForm(request.POST, instance=request.user)
-            perfil_form = PerfilUsuarioForm(request.POST, request.FILES, instance=perfil_usuario_obj)
-            
-            if usuario_form.is_valid() and perfil_form.is_valid():
-                perfil_obj = perfil_form.save(commit=False)
-                perfil_obj.user = request.user
-                perfil_obj.save()
-                usuario_form.save()
-                messages.success(request, 'Perfil actualizado correctamente.')
-                return redirect('miapp:perfil_usuario')
-            else:
-                messages.error(request, 'Por favor, corrige los errores en el formulario.')
-                return render(request, 'miapp/perfil_usuario.html', {
-                    'usuario_form': usuario_form,
-                    'perfil_form': perfil_form,
-            })
+    def validate_image(self, image):
+        valid_extensions = ['.jpg', '.jpeg', '.png', '.gif','.webp']
+        ext = os.path.splitext(image.name)[1]
+        if ext.lower() not in valid_extensions:
+            raise ValidationError("El formato de imagen no es válido. Solo se permiten: JPG, JPEG, PNG,WEBP, GIF.")
+        
+        
 class PostListView(View):
     def get(self, request):
         query = request.GET.get('q')
@@ -161,11 +160,23 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     template_name = 'miapp/post_form.html'
 
     def form_valid(self, form):
+        # Validar el tipo de archivo
+        if form.instance.image:
+            self.validate_image(form.instance.image)
+
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+    def validate_image(self, image):
+        valid_extensions = ['.jpg', '.jpeg', '.png', '.gif','.webp']  # Agrega los formatos permitidos
+        ext = os.path.splitext(image.name)[1]
+        if ext.lower() not in valid_extensions:
+            raise ValidationError("El formato de imagen no es válido. Solo se permiten: JPG, JPEG, PNG, WEBP, GIF.")
+
     def get_success_url(self):
         return reverse('miapp:post_list')
+    
+    
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'miapp/post_confirm_delete.html'
