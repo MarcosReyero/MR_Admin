@@ -22,6 +22,8 @@
 </header>
 
 <div class="container">  
+    <h4 class="text-center" style="background-color: rgba(0, 0, 0, 0.703); border: none;">PRODUCTOS DESTACADOS</h4>
+
     {% include 'productos/components/productos_destacados.html' with productos=productos_destacados %}
 </div>
 <div class="py-5 bg-dark">
@@ -38,87 +40,4 @@
     </div>
 </div>
 
-<section class="py-5">
-    <div class="container px-5 my-5">
-        <div class="row gx-5 justify-content-center">
-            <div class="col-lg-8 col-xl-6">
-                <div class="text-center">
-                    <h2 class="fw-bolder">Desde nuestro blog</h2>
-                    <p class="lead fw-normal text-muted mb-5 ">Mantente al día con las últimas tendencias y noticias en administración de sistemas y tecnología.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row gx-5">
-            <div class="col-lg-4 mb-5">
-                <div class="card h-100 shadow border-0">
-                    <img class="card-img-top" src="https://dummyimage.com/600x350/ced4da/6c757d" alt="..." />
-                    <div class="card-body p-4">
-                        <div class="badge bg-primary bg-gradient rounded-pill mb-2">Noticias</div>
-                        <a class="text-decoration-none link-dark stretched-link" href="#!">
-                            <h5 class="card-title mb-3">Título del blog sobre administración de sistemas</h5>
-                        </a>
-                        <p class="card-text mb-0">Un análisis detallado sobre las mejores prácticas en la gestión de sistemas informáticos.</p>
-                    </div>
-                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                        <div class="d-flex align-items-end justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                                <div class="small">
-                                    <div class="fw-bold">Ana López</div>
-                                    <div class="text-muted">Febrero 15, 2023 &middot; 5 min de lectura</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-5">
-                <div class="card h-100 shadow border-0">
-                    <img class="card-img-top" src="https://dummyimage.com/600x350/adb5bd/495057" alt="..." />
-                    <div class="card-body p-4">
-                        <div class="badge bg-primary bg-gradient rounded-pill mb-2">Media</div>
-                        <a class="text-decoration-none link-dark stretched-link" href="#!">
-                            <h5 class="card-title mb-3">Título de otro blog sobre tecnología</h5>
-                        </a>
-                        <p class="card-text mb-0">Este texto es un poco más largo para ilustrar la adaptabilidad de la altura de cada tarjeta.</p>
-                    </div>
-                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                        <div class="d-flex align-items-end justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                                <div class="small">
-                                    <div class="fw-bold">Pedro González</div>
-                                    <div class="text-muted">Marzo 12, 2023 &middot; 4 min de lectura</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-5">
-                <div class="card h-100 shadow border-0">
-                    <img class="card-img-top" src="https://dummyimage.com/600x350/495057/adb5bd" alt="..." />
-                    <div class="card-body p-4">
-                        <div class="badge bg-primary bg-gradient rounded-pill mb-2">Tendencias</div>
-                        <a class="text-decoration-none link-dark stretched-link" href="#!">
-                            <h5 class="card-title mb-3">Título sobre las tendencias actuales en TI</h5>
-                        </a>
-                        <p class="card-text mb-0">Exploramos las últimas tendencias en administración de sistemas que no te puedes perder.</p>
-                    </div>
-                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                        <div class="d-flex align-items-end justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                                <div class="small">
-                                    <div class="fw-bold">Claudia Ramírez</div>
-                                    <div class="text-muted">Abril 8, 2023 &middot; 6 min de lectura</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 {% endblock contenido %}

@@ -14,7 +14,9 @@
                         <form method="post" enctype="multipart/form-data" class="text-center">
                             {% csrf_token %}
                             {{ form.as_p }}
+                            <h4 class="text-center" style="background-color: rgba(0, 0, 0, 0.703); border: none;">Solo se permiten: JPG, JPEG, PNG,WEBP, GIF</h4>
                             <button type="submit" class="btn btn-primary container">Guardar</button>
+
                         </form>
                     </div>
                 </div>

@@ -8,10 +8,9 @@
 {% block contenido %}
 <div class="form-container">
     <h2>Formulario de Contacto</h2>
-    <hr>
-    <form action="{% url 'miapp:contact' %}" method="post" class="was-validated" novalidate>
+    <form id="contactForm" action="{% url 'miapp:contact' %}" method="post" class="was-validated" novalidate>
         {% csrf_token %}
-
+        
         <!-- mensajes -->
         {% if messages %}
             {% for message in messages %}
@@ -21,34 +20,35 @@
                 </div>
             {% endfor %}
         {% endif %}
-
+    
         <div class="mb-3">
             <label for="name" class="form-label">Nombre y Apellido</label>
             <input type="text" class="form-control" id="name" name="name" required>
             <div class="valid-feedback"></div>
             <div class="invalid-feedback">Introduzca su nombre y apellido</div>
         </div>
-
+    
         <div class="mb-3">
             <label for="email" class="form-label">Correo Electrónico</label>
             <input type="email" class="form-control" id="email" name="email" required>
             <div class="valid-feedback"></div>
             <div class="invalid-feedback">Introduzca su Correo Electrónico válido</div>
         </div>
-
+    
         <div class="mb-3">
             <label for="subject" class="form-label">Asunto</label>
             <input type="text" class="form-control" id="subject" name="subject" required>
             <div class="valid-feedback"></div>
             <div class="invalid-feedback">Introduzca el motivo de su mensaje</div>
         </div>
-
+    
         <div class="mb-3">
             <label for="message" class="form-label">Mensaje</label>
             <textarea class="form-control" name="message" id="message" rows="10" required></textarea>
             <div class="valid-feedback"></div>
             <div class="invalid-feedback">Introduzca el mensaje</div>
         </div>
+    
         <button class="btn btn-primary" type="submit">Enviar Mensaje</button>
     </form>
 </div>

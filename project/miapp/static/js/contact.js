@@ -1,13 +1,14 @@
 document.getElementById("contactForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Prevenir el envío del formulario de forma tradicional
 
+
     const formData = {
         name: document.getElementById("name").value,
         email: document.getElementById("email").value,
-        phone: document.getElementById("phone").value,
+        subject: document.getElementById("subject").value, // Asegúrate de incluir el asunto
         message: document.getElementById("message").value
     };
-
+    
     fetch('/send-email/', {
         method: 'POST',
         headers: {
