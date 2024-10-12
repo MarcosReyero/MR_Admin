@@ -5,7 +5,7 @@ Posts
 {% endblock titulo %}
 
 {% block contenido %}
-<div class="container">
+<div class="container mt-2">
     <div class="card h-50 mb-lg-2" style="background-color: rgba(19, 19, 20, 0.776);">
         <div class="card-body">
             <h1 class="font-weight-light text-light">Posts</h1>
@@ -39,7 +39,7 @@ Posts
     </div>
     
     <div class="row">
-        <div class="col text-center">
+        <div class="col text-center mb-2">
             <a class="btn btn-primary" href="{% url 'miapp:post_create' %}">Crear nuevo post</a>
         </div>
     </div>

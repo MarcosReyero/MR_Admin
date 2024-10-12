@@ -5,80 +5,31 @@
 {% endblock titulo %}
 {% block contenido %}
 
-<!-- Heading Row-->
 
 <header class="header-custom">
     <div class="container px-5 ">
         <div class="row gx-5 align-items-center justify-content-center">
             <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="text-center">
-                    <h1 class="display-2 fw-bolder mb-2">Plantilla para Administradores de Sistemas</h1>
-                    <p class="lead fw-normal mb-4">Optimiza la gestión de tus sistemas y mejora la infraestructura IT con herramientas efectivas y procesos simplificados.</p>
+                    <h1 class="display-2 fw-bolder mb-2 mt-3">Tu esencia en cada prenda, sin concesiones.</h1>
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-center">
-                        <a class="btn btn-primary btn-lg" href="#features">Comenzar</a>
-                        <a class="btn btn-outline-light btn-lg" href="#!">Aprender Más</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
 </header>
-<!-- Features section-->
-<section class="section_1-bg py-5" id="features">
-    <div class="container px-5 my-5">
-        <div class="row gx-5">
-            <div class="col-lg-4 mb-5 mb-lg-0">
-                <h2 class="fw-bolder mb-0">Una mejor manera de gestionar sistemas.</h2>
-            </div>
-            <div class="col-lg-8">
-                <div class="row gx-5 row-cols-1 row-cols-md-2">
-                    <div class="col mb-5 h-100">
-                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                            <i class="bi bi-collection"></i>
-                        </div>
-                        <h2 class="h5">Gestión Eficiente</h2>
-                        <p class="mb-0">Implementa soluciones que optimizan el rendimiento de tus sistemas y garantizan su disponibilidad.</p>
-                    </div>
-                    <div class="col mb-5 h-100">
-                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                            <i class="bi bi-building"></i>
-                        </div>
-                        <h2 class="h5">Infraestructura Robusta</h2>
-                        <p class="mb-0">Desarrolla y mantiene una infraestructura IT sólida que soporte las demandas actuales del negocio.</p>
-                    </div>
-                    <div class="col mb-5 mb-md-0 h-100">
-                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                            <i class="bi bi-toggles2"></i>
-                        </div>
-                        <h2 class="h5">Innovación Continua</h2>
-                        <p class="mb-0">Adopta nuevas tecnologías y mejores prácticas para mejorar la gestión de tus sistemas.</p>
-                    </div>
-                    <div class="col h-100">
-                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                            <i class="bi bi-toggles2"></i>
-                        </div>
-                        <h2 class="h5">Soporte Integral</h2>
-                        <p class="mb-0">Ofrece un soporte integral a los usuarios, asegurando la continuidad del servicio y la resolución de problemas.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- Testimonial section-->
+<div class="container">  
+    {% include 'productos/components/productos_destacados.html' with productos=productos_destacados %}
+</div>
 <div class="py-5 bg-dark">
     <div class="container px-5 my-5">
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-10 col-xl-7">
                 <div class="text-center">
-                    <div class="fs-4 mb-4 fst-italic">"Trabajar con plantillas ha reducido considerablemente mi tiempo de desarrollo al implementar nuevos sistemas. Empezar con una plantilla eficiente facilita todo el proceso!"</div>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                        <div class="fw-bold">
-                            Juan Pérez
-                            <span class="fw-bold text-primary mx-1">/</span>
-                            Administrador de Sistemas, TechCorp
+                    <div class="fs-4 mb-4 fst-italic">"Completa tu look con accesorios exclusivos que complementan tu pasión por el rock, llevando siempre contigo esa vibra inconfundible que solo el verdadero fan entiende."</div>
                         </div>
                     </div>
                 </div>
@@ -87,7 +38,6 @@
     </div>
 </div>
 
-<!-- Blog preview section-->
 <section class="py-5">
     <div class="container px-5 my-5">
         <div class="row gx-5 justify-content-center">

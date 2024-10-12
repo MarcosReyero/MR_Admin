@@ -1,10 +1,6 @@
-<!-- card_producto.html -->
-
 <div class="card producto-card">
     {% if producto.imagen %}
-        <img src="{{ producto.imagen.url }}" class="card-img-top producto-imagen"
-             alt="{{ producto.nombre }}"
-             style="max-width: 294px; max-height: 294px; object-fit: cover;">
+        <img src="{{ producto.imagen.url }}" class="card-img-top producto-imagen" alt="{{ producto.nombre }}">
     {% endif %}
     <div class="card-body">
         <h5 class="card-title">{{ producto.nombre }}</h5>

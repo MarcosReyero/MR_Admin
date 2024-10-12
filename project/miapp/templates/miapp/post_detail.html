@@ -1,55 +1,52 @@
 {% extends 'miapp/base.html' %}
 
 {% block contenido %}
-<div class="container mt-5">
+<div class="container mt-5 blog-post">
 
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <p class="card-text">{{ post.author }} - {{ post.created_at }}</p>
-                </div>
+            <div class="post-header mb-4">
+                <p class="post-meta">{{ post.author }} - {{ post.created_at|date:"F j, Y" }}</p>
             </div>
 
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h1 class="card-title">{{ post.title }}</h1>
-                    <p class="card-text">{{ post.content }}</p>
-                </div>
+            <div class="post-content mb-4">
+                <h1 class="post-title">{{ post.title }}</h1>
+
+                <!-- Mostrar la imagen si está disponible -->
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="Imagen del post" class="img-fluid mb-3 post-image">
+                    {%else %}
+                    <p class="post-text">[Este post no tiene imagen asociada.]</p
+                {% endif %}
+                <p class="post-text">{{ post.content }}</p>
             </div>
 
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h2 class="card-title">Comentarios</h2>
-                    <ul class="list-group list-group-flush">
-                        {% for comment in comments %}
-                        <li class="list-group-item">
-                            <strong>{{ comment.author }}:</strong> {{ comment.body }} 
-                            <span class="text-muted">({{ comment.created_at }})</span>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
+            <div class="comments-section mb-4">
+                <h2 class="comments-title">Comentarios</h2>
+                <ul class="list-group list-group-flush">
+                    {% for comment in comments %}
+                    <li class="list-group-item comment-item">
+                        <strong>{{ comment.author }}:</strong> {{ comment.body }} 
+                        <span class="text-muted">({{ comment.created_at|date:"F j, Y, g:i a" }})</span>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
 
-            <div class="card mb-4">
-                <div class="card-body">
-                    {% if user.is_authenticated %}
-                    <h2 class="card-title">Agregar un comentario</h2>
-                    <form method="post">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit" class="btn btn-primary">Añadir comentario</button>
-                    </form>
-                    {% else %}
-                    <p>Debes iniciar sesión para comentar en posts. 
-                        <a href="{% url 'miapp:login' %}">Iniciar sesión</a> o 
-                        <a href="{% url 'miapp:register' %}">Registrarse</a>
-                    </p>
-                    {% endif %}
-                </div>
+            <div class="add-comment-section mb-4">
+                {% if user.is_authenticated %}
+                <h2 class="add-comment-title">Agregar un comentario</h2>
+                <form method="post" class="comment-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Añadir comentario</button>
+                </form>
+                {% else %}
+                <p>Debes iniciar sesión para comentar en posts. 
+                    <a href="{% url 'miapp:login' %}">Iniciar sesión</a> o 
+                    <a href="{% url 'miapp:register' %}">Registrarse</a>
+                </p>
+                {% endif %}
             </div>
 
             <a class="btn btn-secondary" href="{% url 'miapp:post_list' %}">Volver a la lista</a>
