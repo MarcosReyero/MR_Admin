@@ -24,10 +24,15 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from django.contrib import messages
 
+
 class HomeView(LoginRequiredMixin, View):
     def get(self, request):
-        return render(request, 'miapp/index.html')
+        productos_destacados = Producto.objects.filter(destacado=True) 
 
+        context = {
+            'productos_destacados': productos_destacados,
+        }
+        return render(request, 'miapp/index.html', context)
 class ContactView(View):
     def get(self, request):
         return render(request, 'miapp/contact.html')
@@ -86,7 +91,7 @@ class PerfilUsuarioView(LoginRequiredMixin, View):
             'perfil_form': perfil_form,
         })    
         
-        def post(self, request):
+    def post(self, request):
 
             perfil_usuario_obj = getattr(request.user, 'perfilusuario', None)
             usuario_form = UsuarioForm(request.POST, instance=request.user)
@@ -161,7 +166,6 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('miapp:post_list')
-
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'miapp/post_confirm_delete.html'

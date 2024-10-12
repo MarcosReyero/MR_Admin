@@ -1,0 +1,19 @@
+{% load static %}
+<div class="container">
+    <div class="row">
+        {% for producto in productos %}
+            <div class="col-md-4">
+                <div class="card producto-card mb-4"> 
+                    {% if producto.imagen %}
+                        <img src="{{ producto.imagen.url }}" class="card-img-top producto-imagen" alt="{{ producto.nombre }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.nombre }}</h5>
+                        <p class="card-text"><strong>Precio:</strong> {{ producto.precio }}</p>
+                        <a href="{% url 'producto:detalle_producto' pk=producto.pk %}" class="btn btn-primary bg-dark">Ver Producto</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

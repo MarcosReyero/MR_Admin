@@ -14,14 +14,14 @@
 /* styles.css */
 /* Estilo para el Header */
 .header-custom {
-  background-color: rgba(52, 58, 64, 0.621); /* color de fondo oscuro con opacidad */
   background-size: cover;
-  height: 100vh; /* Ocupa el 100% de la altura de la ventana */
-  padding-top: 100px; /* Ajusta este valor para el padding superior que desees */
+  padding-top: 10px; /* Ajusta este valor para el padding superior que desees */
   margin-bottom: 0; /* Asegúrate de que no haya margen inferior */
   display: flex; /* Mantiene el flexbox para organizar el contenido */
   flex-direction: column; /* Cambiado a columna para alinear elementos verticalmente */
   justify-content: flex-start; /* Alinea los elementos hacia la parte superior */
+  transition: padding 0.3s ease; /* Transición suave al cambiar el tamaño */
+  padding-bottom: 40px; /* Ajusta según sea necesario */
 }
 
 /* Estilo para los encabezados */
@@ -78,11 +78,17 @@
   }
 }
 
+.section_1-bg {
+
+background-color: rgba(7, 7, 7, 0.937); /* color de fondo oscuro con opacidad */
+
+}
+
 .form-container {
   max-width: 600px; /* Ancho máximo del formulario */
   margin: 1rem auto; /* Centrar el formulario y añadir espacio arriba y abajo */
   padding: 1rem; /* Espaciado interno */
-  background-color: #f9f9f9; /* Color de fondo */
+  background-color: rgb(2, 2, 2); /* color de fondo oscuro con opacidad */
   border-radius: 8px; /* Bordes redondeados */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
@@ -110,12 +116,12 @@
 .form-container .form-control:focus {
   border-color: #007bff; /* Color de borde al enfocar */
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra al enfocar */
-}
-.section_1-bg {
-  background-color: rgba(42, 44, 46, 0.744); /* color de fondo oscuro con opacidad */
-  
+}  
+
 /* Estilo para el body */
-}body {
+
+
+body {
   background-image: url('/static/img/background-main.jpg');
   background-size: cover;
   background-position: center;
@@ -124,6 +130,20 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative; /* Necesario para el pseudo-elemento ::before */
+  z-index: 1; /* Asegura que el contenido esté por encima del overlay */
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(7, 7, 7, 0.809); /* color de fondo oscuro con opacidad */
+  z-index: -1; /* Pone el overlay detrás del contenido */
+  pointer-events: none; /* Asegura que el overlay no bloquee la interacción con el contenido */
 }
 
 /* Estilo para el main para ocupar el espacio disponible */
@@ -138,15 +158,25 @@ main {
   text-align: center;
   margin-top: auto; /* Asegura que el footer esté en la parte inferior */
 }
+/* bg y opacidad de seccion lista productos */
+
+
 
 .navbar {
-  padding: 10px 20px; /* Espaciado interno */
+  position: fixed; /* Fija el navbar en la parte superior */
+  top: 0; /* Asegura que esté pegado al borde superior */
+  left: 0; /* Asegura que se alinee con el borde izquierdo */
+  width: 100%; /* Hace que el navbar cubra todo el ancho de la pantalla */
+  z-index: 1000; /* Para que esté por encima de otros elementos */
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro con opacidad */
+  backdrop-filter: blur(5px); /* Efecto de desenfoque en el fondo */
 }
-
 /* Enlace de perfil */
 .navbar-profile-link {
   color: white; /* Color del texto */
   margin-right: 10px; /* Espacio entre el texto y la imagen */
+  text-align: center;
+  margin-left: 0;
 }
 
 /* Estilo de la imagen de perfil */
@@ -161,7 +191,6 @@ main {
 .navbar-profile {
   display: flex;
   align-items: center; /* Centrar verticalmente */
-  margin-left: auto; /* Empujar la sección hacia la derecha */
 }
 
 /* Ajustes para la imagen del perfil en la navbar */
@@ -197,25 +226,86 @@ main {
 /* styles.css */
 
 /* Ensure all product cards are the same size */
+
 /* styles.css */
 
-.producto-card {
+/* General styles for product images */
+.img-fluid {
   width: 100%;
-  height: 400px; /* Ajusta el tamaño de la tarjeta según tus necesidades */
+  height: 500px;
+  object-fit: contain; /* Ensure the entire image is visible without being cropped */
+}
+
+/* Styles for screens smaller than 768px (e.g., mobile devices) */
+@media (max-width: 767px) {
+  .img-fluid {
+      height: auto; /* Adjust height automatically */
+      max-width: 100%; /* Ensure image does not exceed container's width */
+  }
+
+  .img-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+  }
+}
+
+/* Additional styles for the description card */
+.description-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-top: 0; /* Align to the top */
+  margin-left: -10px; /* Extend a bit to the left */
+}
+
+
+/* Ensure the product card body fits within the card */
+.producto-card {
+  width: 100%; /* Asegúrate de que las tarjetas ocupen todo el ancho */
+  height: 450px; /* Ajusta según sea necesario */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-bottom: 20px;
-  border: 1px solid #ccc; /* Opcional: añade un borde para visualizar mejor las tarjetas */
+  margin-bottom: 20px; /* Espaciado entre tarjetas */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-.producto-imagen {
-  width: 100%;
-  height: 200px; /* Ajusta el tamaño de la imagen según tus necesidades */
-  object-fit: cover; /* Asegura que la imagen se ajuste dentro del contenedor sin distorsión */
+
+.card-category {
+  background-color: var(--color, #231f1f); /* Color de fondo, default blanco */
+  opacity: var(--opacity, 1); /* Opacidad, default 1 (100%) */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  text-align: center; /* Centra el texto */
 }
 
-/* Ensure the product card body fits within the card */
+.card-category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos de texto */
+.card-category a {
+  background-color: var(--color, #231f1f); /* Color de fondo, default blanco */
+  text-decoration: none; /* Sin subrayado en los enlaces */
+  color: #ffffff; /* Color de texto */
+  font-size: 18px; /* Tamaño de fuente */
+  font-weight: bold; /* Negrita */
+  font-family: Arial, sans-serif; /* Familia de fuentes */
+}
+
+
 
 
 
@@ -227,6 +317,38 @@ main {
   border-radius: 5px;
   text-align: center;
   background-color: #000;
+}
+.producto-card {
+  width: 300px; /* Define un ancho fijo para todas las cards */
+  height: 450px; /* Define un alto fijo para todas las cards */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Para asegurarte de que no haya desbordamientos */
+}
+
+.producto-imagen {
+  width: 100%;
+  height: 300px; /* Fija la altura para las imágenes */
+  object-fit: cover; /* Ajusta la imagen dentro del contenedor manteniendo su proporción */
+  border-bottom: 1px solid #ddd; /* Añade una separación visual entre la imagen y el cuerpo de la card */
+}
+
+.card-body {
+  padding: 15px;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  margin-bottom: 20px;
 }
 /* Optional: force minimum height */
 .img-fluid {
@@ -255,6 +377,95 @@ main {
       align-items: center;
       text-align: center;
   }
+}
+.blog-post {
+  background-color: #3e4043; /* Fondo suave para el post */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 20px; /* Espaciado interno */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.post-header {
+  border-bottom: 1px solid #e9ecef; /* Línea inferior en el encabezado */
+  padding-bottom: 10px;
+}
+
+.post-meta {
+  font-size: 0.9em; /* Tamaño de fuente más pequeño */
+  color: #6c757d; /* Color de texto gris */
+}
+
+.post-title {
+  font-size: 2em; /* Tamaño de fuente grande */
+  margin-top: 10px;
+  color: #343a40; /* Color del título */
+}
+
+.post-image {
+  border-radius: 5px; /* Bordes redondeados para la imagen */
+}
+
+.post-text {
+  font-size: 1.1em; /* Tamaño de fuente del contenido */
+  line-height: 1.6; /* Altura de línea más amplia */
+  color: #000000; /* Color del texto del contenido */
+  background-color: #f9aa13; /* Fondo blanco para la sección de comentarios */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  padding: 20px; /* Espaciado interno */
+}
+
+.comments-section {
+  background-color: #f9aa13; /* Fondo blanco para la sección de comentarios */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  padding: 20px; /* Espaciado interno */
+}
+
+.comments-title {
+  font-size: 1.5em; /* Tamaño de fuente del título de comentarios */
+  margin-bottom: 10px; /* Espaciado inferior */
+  color: #000;
+}
+
+.comment-item {
+  padding: 10px; /* Espaciado interno para cada comentario */
+  border-bottom: 1px solid #ddd; /* Línea inferior para cada comentario */
+  color: #f7f7f8; /* Color del texto del comentario */
+  background-color: #3e4043; /* Fondo suave para cada comentario */
+}
+
+.add-comment-section {
+  max-width: 400px; /* Ajusta el tamaño máximo según lo que necesites */
+  margin: 0 auto; /* Centra el formulario */
+  padding: 15px; /* Espacio interno */
+  background-color: #353638; /* Color de fondo suave */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column; /* Coloca los elementos en columna */
+  color: #000;
+}
+
+.comment-form button {
+  margin-top: 10px; /* Espacio entre el contenido y el botón */
+}
+.add-comment-title {
+  font-size: 1.5em; /* Tamaño de fuente para agregar comentario */
+  margin-bottom: 10px; /* Espaciado inferior */
+  background-color: #3e4043; /* Fondo blanco para la sección de comentarios */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  padding: 20px; /* Espaciado interno */
+  color: #f9aa13; /* Color del texto del título */
+
+}
+
+.comment-item:last-child {
+  border-bottom: none; /* Eliminar línea en el último comentario */
 }
 
 :root {
@@ -360,6 +571,13 @@ body {
   max-width: 800px;
   margin: 0 auto;
 }
+.contenedor-productos {
+    display: flex; /* Para que los productos se organicen en fila */
+    flex-wrap: wrap; /* Permite que los productos se muevan a la siguiente línea si no hay espacio */
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+    gap: 20px; /* Espacio entre los productos */
+    margin-bottom: 20px; /* Espacio inferior para separar de otros elementos */
+}
 
 .post-list {
   list-style-type: none;
@@ -384,6 +602,8 @@ body {
   font-size: 24px;
   color: #f4f4f4;
   text-decoration: none;
+  display: flex;
+  justify-content: center;
 }
 
 .post-title:hover {
@@ -4477,11 +4697,11 @@ textarea.form-control-lg {
   --bs-card-inner-border-radius: calc(0.375rem - 1px);
   --bs-card-cap-padding-y: 0.5rem;
   --bs-card-cap-padding-x: 1rem;
-  --bs-card-cap-bg: rgba(0, 0, 0, 0.03);
+  --bs-card-cap-bg: rgba(0, 0, 0, 0.94);
   --bs-card-cap-color: ;
   --bs-card-height: ;
   --bs-card-color: ;
-  --bs-card-bg: #fff;
+  --bs-card-bg: #231f1f;
   --bs-card-img-overlay-padding: 1rem;
   --bs-card-group-margin: 0.75rem;
   position: relative;
@@ -5197,9 +5417,9 @@ textarea.form-control-lg {
   position: relative;
   display: block;
   padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
-  color: var(--bs-list-group-color);
+  color: var(--bs-accordion-active-bg;
   text-decoration: none;
-  background-color: var(--bs-list-group-bg);
+  background-color: var(--bs-gray-dark);
   border: var(--bs-list-group-border-width) solid var(--bs-list-group-border-color);
 }
 .list-group-item:first-child {
@@ -8477,7 +8697,7 @@ textarea.form-control-lg {
 
 .text-muted {
   --bs-text-opacity: 1;
-  color: #6c757d !important;
+  color: #798086 !important;
 }
 
 .text-black-50 {
