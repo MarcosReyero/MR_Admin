@@ -24,15 +24,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'miapp:contact' %}">Contact</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'miapp:about' %}">About</a>
+                </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'miapp:post_create' %}">New Post</a>
-                </li>
-                <li class="nav-item">
-                    <form method="POST" action="{% url 'miapp:logout' %}">
-                        {% csrf_token %}
-                        <button class="btn btn-link nav-link" type="submit">Logout</button>
-                    </form>
                 </li>
                 {% else %}
                 <li class="nav-item">
@@ -44,11 +41,20 @@
                 {% endif %}
             </ul>
             <!-- Sección de perfil a la derecha -->
+       <!-- Sección de perfil a la derecha -->
             <div class="navbar-profile d-flex align-items-center ms-auto">
-                <a href="{% url 'miapp:perfil_usuario' %}" class="navbar-profile-link">Perfil</a>
-                {% if request.user.perfilusuario.foto_perfil %}
-                    <img src="{{ request.user.perfilusuario.foto_perfil.url }}" alt="Foto de perfil" class="navbar-profile-img">
-                {% endif %}
+                 {% if user.is_authenticated %}
+                    <a class="nav-item">
+                        <form method="POST" action="{% url 'miapp:logout' %}">
+                            {% csrf_token %}
+                            <button class="navbar-link" type="submit">Logout</button>
+                        </form>
+                    </a>
+                    <a href="{% url 'miapp:perfil_usuario' %}" class="navbar-profile-link">Perfil</a>
+                    {% if request.user.perfilusuario.foto_perfil %}
+                        <img src="{{ request.user.perfilusuario.foto_perfil.url }}" alt="Foto de perfil" class="navbar-profile-img">
+                    {% endif %}
+                 {% endif %}
             </div>
         </div>
     </div>
