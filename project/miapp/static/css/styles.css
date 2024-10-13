@@ -175,6 +175,25 @@ main {
   background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro con opacidad */
   backdrop-filter: blur(5px); /* Efecto de desenfoque en el fondo */
 }
+
+
+.navbar-link {
+  color: white; /* Color del texto de los enlaces */
+  text-decoration: none; /* Sin subrayado */
+}
+
+.navbar-link:hover {
+  text-decoration: underline; /* Subrayar al pasar el mouse */
+}
+
+.navbar-profile .navbar-link {
+  margin-left: 15px; /* Espaciado entre enlaces */
+}
+
+.navbar-profile .btn-link {
+  padding: 0; /* Sin padding extra en el botón */
+  color: white; /* Asegura que el color sea blanco */
+}
 /* Enlace de perfil */
 .navbar-profile-link {
   color: white; /* Color del texto */

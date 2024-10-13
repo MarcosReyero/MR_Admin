@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Producto, Categoria
+from .models import Categoria, Producto, Carrito, CarritoProducto, Orden, OrdenProducto
 from django.utils.html import format_html
 
 class ProductoAdmin(admin.ModelAdmin):
@@ -11,5 +11,25 @@ class ProductoAdmin(admin.ModelAdmin):
         return "Sin imagen"
     mostrar_imagen.short_description = "Imagen"
 
-admin.site.register(Producto, ProductoAdmin)
-admin.site.register(Categoria)
+
+
+@admin.register(Carrito)
+class CarritoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'usuario', 'fecha_agregado')
+    search_fields = ('usuario__username',)
+
+@admin.register(CarritoProducto)
+class CarritoProductoAdmin(admin.ModelAdmin):
+    list_display = ('carrito', 'producto', 'cantidad')
+    search_fields = ('carrito__usuario__username', 'producto__nombre')
+
+@admin.register(Orden)
+class OrdenAdmin(admin.ModelAdmin):
+    list_display = ('id', 'usuario', 'fecha', 'total', 'pagado')
+    search_fields = ('usuario__username',)
+    list_filter = ('pagado', 'fecha')
+
+@admin.register(OrdenProducto)
+class OrdenProductoAdmin(admin.ModelAdmin):
+    list_display = ('orden', 'producto', 'cantidad', 'precio')
+    search_fields = ('orden__usuario__username', 'producto__nombre')

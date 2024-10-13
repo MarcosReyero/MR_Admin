@@ -109,23 +109,28 @@ class PerfilUsuarioView(LoginRequiredMixin, View):
             raise ValidationError("El formato de imagen no es válido. Solo se permiten: JPG, JPEG, PNG,WEBP, GIF.")
         
         
+
 class PostListView(View):
     def get(self, request):
-        query = request.GET.get('q')
+        query = request.GET.get('q', '')
         if query:
             posts = Post.objects.filter(
-                Q(title__icontains=query) |
-                Q(content__icontains=query) |
-                Q(author__username__icontains=query)
+                Q(title__istartswith=query) |  
+                Q(content__istartswith=query) |  
+                Q(author__username__istartswith=query)  
             )
+            results_message = f'Se encontraron {posts.count()} posts que comienzan con "{query}".'
         else:
             posts = Post.objects.all()
-        
+            results_message = 'Muestra todos los posts disponibles.'
+
         context = {
             'posts': posts,
             'query': query,
+            'results_message': results_message,
         }
         return render(request, 'miapp/post_list.html', context)
+
 
 class AboutView(View):
     def get(self, request):

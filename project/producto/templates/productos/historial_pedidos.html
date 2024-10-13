@@ -1,0 +1,21 @@
+{% extends 'miapp/base.html' %}
+
+{% block titulo %}Historial de Pedidos{% endblock titulo %}
+
+{% block contenido %}
+<h2>Historial de Pedidos</h2>
+
+{% if pedidos %}
+    <ul>
+        {% for pedido in pedidos %}
+            <li>
+                Pedido ID: {{ pedido.id }} - Total: {{ pedido.total }} - Fecha: {{ pedido.fecha_creacion }}
+                <!-- Agrega más detalles del pedido según sea necesario -->
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No tienes pedidos en tu historial.</p>
+{% endif %}
+
+{% endblock contenido %}

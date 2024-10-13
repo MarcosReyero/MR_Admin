@@ -1,0 +1,40 @@
+{% extends 'miapp/base.html' %}
+
+{% load custom_filters %}
+
+{% block titulo %}Carrito de Compras{% endblock titulo %}
+{% block contenido %}
+<h2>Tu carrito de compras</h2>
+
+{% if carrito_productos %}
+    <div class="productos-carrito">
+        <p>Productos en el carrito: {{ carrito_productos.count }}</p>  <!-- Muestra la cantidad de productos -->
+        <div class="row"> <!-- Contenedor para la cuadrícula -->
+            {% for item in carrito_productos %}
+                <div class="producto-card col-md-3"> <!-- Columna para cada producto -->
+                    {% include 'productos/components/card_producto.html' with producto=item.producto %}
+                    <p><strong>Cantidad:</strong> {{ item.cantidad }}</p>
+                    <p><strong>Subtotal:</strong> {{ item.producto.precio|multiply:item.cantidad }}</p>
+                    <form method="POST" action="{% url 'producto:actualizar_carrito' item.id %}">
+                        {% csrf_token %}
+                        <input type="number" name="cantidad" value="{{ item.cantidad }}" min="1" />
+                        <button type="submit">Actualizar</button>
+                    </form>
+                    <form method="POST" action="{% url 'producto:eliminar_del_carrito' item.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger mt-2">Eliminar</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <h3>Total: {{ total }}</h3>
+    <form method="POST" action="{% url 'producto:realizar_pedido' %}">
+        {% csrf_token %}
+        <button type="submit">Realizar pedido</button>
+    </form>
+{% else %}
+    <p>No hay productos en el carrito.</p>
+{% endif %}
+
+{% endblock contenido %}

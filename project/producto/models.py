@@ -19,14 +19,27 @@ class Producto(models.Model):
     def __str__(self):
         return f"{self.nombre} {'(Destacado)' if self.destacado else ''}"    
 class Carrito(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    cantidad = models.PositiveIntegerField(default=1)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)  
+    productos = models.ManyToManyField(Producto, through='CarritoProducto')
     fecha_agregado = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.cantidad} x {self.producto.nombre} de {self.usuario.username}"
-    
+        return f"Carrito de {self.usuario.username}"
+
+    def __iter__(self):
+        for carrito_producto in self.carritaproducto_set.all():
+            yield carrito_producto
+
+    def total(self):
+        return sum(item.producto.precio * item.cantidad for item in self.carrito_productos.all())
+
+class CarritoProducto(models.Model):
+    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE, related_name='carrito_productos')  # Agregar related_name
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.cantidad} x {self.producto.nombre} en el carrito"
 class Orden(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha = models.DateTimeField(auto_now_add=True)

@@ -1,0 +1,15 @@
+{% extends 'miapp/base.html' %}
+
+{% block titulo %}Página de Pagos{% endblock titulo %}
+
+{% block contenido %}
+<h2>Resumen de tu pedido</h2>
+<p><strong>Total a pagar:</strong> {{ orden.total }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="orden_id" value="{{ orden.id }}">
+    <button type="submit">Realizar Pago</button>
+</form>
+
+{% endblock contenido %}
