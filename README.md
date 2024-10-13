@@ -1,5 +1,7 @@
 # Mi Proyecto Django - proyecto final
 
+## Presentacion del Proyecto : https://youtu.be/3AmY5W-hIdY
+
 
 Este es un proyecto de aplicación web construido con Django. La aplicación permite a los usuarios gestionar publicaciones, comentarios y perfiles de usuario. También incluye un sistema de autenticación para usuarios y administradores.
 
