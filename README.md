@@ -1,4 +1,4 @@
-# Mi Proyecto Django - proyecto final
+# Proyecto Django 
 
 ## Presentacion del Proyecto : https://youtu.be/3AmY5W-hIdY
 
